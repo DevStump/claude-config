@@ -12,23 +12,34 @@
 
 ## Folder Structure
 
+### In GitHub Repository
 ```
 .claude/
 ├── CLAUDE.md              # Core workflow preferences (auto-read)
 ├── README.md              # This guide (auto-read)
-├── cleanup-claude-folder.sh  # Weekly cleanup script
+├── settings.json          # Claude configuration
 ├── settings.local.json    # Git safety and permissions
 │
-├── commands/              # Reusable commands (use with /user:command)
-│   └── dev-start.md       # Start dev environment
+├── commands/              # Reusable global commands
+│   ├── daily-sync.md      # Sync with main, update dependencies
+│   ├── debug.md           # Debug issues systematically
+│   └── explain.md         # Get explanation of code
 │
-├── guidelines/            # Topic-specific docs (reference only)
-│   ├── sql/              # SQL best practices
-│   └── ios/              # iOS-specific guidelines
-│
-├── agents/               # Future: Specialized agents
-├── projects/             # Project conversation history (auto-managed)
-└── archive/              # Old/unused files
+└── agents/                # Specialized AI agents
+    ├── pr-assistant.md    # Help create pull requests
+    └── test-writer.md     # Generate test files
+```
+
+### Local Only (Gitignored)
+```
+.claude/
+├── projects/              # 📁 Conversation history (auto-managed)
+├── todos/                 # 📁 Active todo lists
+├── statsig/               # 📁 Telemetry data
+├── shell-snapshots/       # 📁 Terminal session snapshots
+├── ide/                   # 📁 IDE-specific settings
+├── .last-cleanup          # 📄 Cleanup timestamp
+└── .DS_Store              # 📄 Mac system file
 ```
 
 ## When to Add Files
@@ -42,7 +53,6 @@ Only add files here if they should apply to **EVERY** Claude conversation:
 ### Subfolders (Manual Reference)
 Use subfolders for content that's only needed occasionally:
 - **commands/** - Reusable workflows accessed via `/user:command-name`
-- **guidelines/** - Topic-specific best practices (SQL, iOS, etc.)
 - **agents/** - Specialized agents for specific domains
 
 ## Best Practices
@@ -55,17 +65,17 @@ Use subfolders for content that's only needed occasionally:
 
 ## Maintenance
 
-- **Cleanup Script**: Runs weekly via launchd
-- **Projects Folder**: Auto-managed (keeps 10-20 recent conversations)
-- **Manual Cleanup**: Run `~/.claude/cleanup-claude-folder.sh`
+- **Projects Folder**: Auto-managed by Claude (keeps recent conversations)
+- **Todos Folder**: Stores active task lists
+- **Local folders**: Not synced to GitHub, managed locally
 
 ## Key Files
 
 | File | Purpose | When Modified |
 |------|---------|--------------|
 | CLAUDE.md | Core workflow rules | As needed |
+| settings.json | Claude configuration | Rarely |
 | settings.local.json | Security/permissions | Rarely |
-| cleanup-claude-folder.sh | Maintenance script | Rarely |
 
 ## How to Use Commands & Agents
 
@@ -77,7 +87,6 @@ Commands are markdown files that provide instructions for specific tasks.
 **Available Commands:**
 ```bash
 # Global Commands (from ~/.claude/commands/)
-/user:dev-start          # Start full development environment
 /user:daily-sync         # Sync with main, update dependencies
 /user:explain [code]     # Get explanation of code/function
 /user:debug [issue]      # Debug specific issue systematically
@@ -101,7 +110,7 @@ pr-assistant     # "Use pr-assistant agent to help create a PR"
 
 ## Need Help?
 
-- Check specific guidelines in `/guidelines/` folder
-- Run `/user:dev-start` to start development environment
 - Review CLAUDE.md for workflow preferences
 - Use `/user:explain` to understand any complex code
+- Use `/user:debug` to troubleshoot issues systematically
+- Use `/user:daily-sync` to sync with main branch
