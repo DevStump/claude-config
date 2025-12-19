@@ -1,0 +1,21 @@
+# Temporary and auto-generated files
+projects/
+todos/
+statsig/
+shell-snapshots/
+ide/
+.last-cleanup
+
+# System files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Sensitive or local-only files
+*.local
+*.private
+
+# Backup files
+*.bak
+*.orig
